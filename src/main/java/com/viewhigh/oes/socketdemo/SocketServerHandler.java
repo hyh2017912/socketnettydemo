@@ -6,6 +6,7 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.CharsetUtil;
+import io.netty.util.ReferenceCountUtil;
 
 import java.io.UnsupportedEncodingException;
 import java.util.UUID;
@@ -16,8 +17,8 @@ public class SocketServerHandler extends SimpleChannelInboundHandler {
     @Override
     protected void messageReceived(ChannelHandlerContext ctx, Object msg){
         //打印出客户端地址
-        System.out.println(ctx.channel().remoteAddress()+", "+msg);
-        ctx.channel().writeAndFlush("form server: "+ UUID.randomUUID());
+//        System.out.println(ctx.channel().remoteAddress()+", "+msg);
+//        ctx.channel().writeAndFlush("form server: "+ UUID.randomUUID());
     }
 
     /*
@@ -67,14 +68,24 @@ public class SocketServerHandler extends SimpleChannelInboundHandler {
 
     /**
      * 功能：读取客户端发送过来的信息
+     * 调用时刻：This method is called with the received message, whenever new data is received from a client.
+     *  注意：参考光放文档实现，关闭资源
      */
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg){
         // 第一种：接收字符串时的处理
-//        ByteBuf buf = (ByteBuf) msg;  // TODO  当发送String 时，此处会转换异常;server 和 client 的handler中都存在，避免他
-//        String rev = getMessage(buf);
-        System.out.println("服务器收到客户端数据:" + msg);
+        /*try{
+//        ByteBuf buf = ((ByteBuf) msg);  // TODO  当发送String 时，此处会转换异常，但官方文档示例如此，;server 和 client 的handler中都存在，避免他
+//        String rev = getMessage(((ByteBuf) msg));
+            System.out.println("服务器收到客户端数据:" + msg); // 输出控制台时，需要手动释放信息即finally中代码
+        }finally {
+            ReferenceCountUtil.release(msg);
+        }*/
 
+        // 第一种：接收字符串时的处理,此时netty将自动释放信息
+        System.out.println("服务器收到客户端数据:" + msg);
+//        ctx.write(msg);
+//        ctx.flush();  // 也可以直接使用writeAndFlush()方法
     }
 
     /**
@@ -86,20 +97,27 @@ public class SocketServerHandler extends SimpleChannelInboundHandler {
         // 第一种方法：写一个空的buf，并刷新写出区域。完成后关闭sock channel连接。
 //        ctx.writeAndFlush(Unpooled.EMPTY_BUFFER).addListener(ChannelFutureListener.CLOSE);  // 注释掉 ，写一个非空的buf
         // .addListener(ChannelFutureListener.CLOSE) 接收信息后是否关闭连接
-        ctx.writeAndFlush(Unpooled.copiedBuffer("你好，客户端，已收到你发送的信息", CharsetUtil.UTF_8)).addListener(ChannelFutureListener.CLOSE);
+//        ctx.writeAndFlush(Unpooled.copiedBuffer("你好，客户端，已收到你发送的信息", CharsetUtil.UTF_8)).addListener(ChannelFutureListener.CLOSE);
+        ctx.writeAndFlush(Unpooled.copiedBuffer("你好，客户端，已收到你发送的信息", CharsetUtil.UTF_8));
         // ctx.flush();
-        // ctx.flush(); //
         // 第二种方法：在client端关闭channel连接，这样的话，会触发两次channelReadComplete方法。
         // ctx.flush().close().sync(); // 第三种：改成这种写法也可以，但是这中写法，没有第一种方法的好。
     }
 
     /**
-     * 功能：服务端发生异常的操作；此方法会覆盖具体的异常，注释掉
+     * 功能：服务端发生异常的操作，连接关闭前应当返回一个错误码；
+     * The exceptionCaught() event handler method is called with a Throwable when an exception was raised by Netty
+     * due to an I/O error or by a handler implementation due to the exception thrown while processing events.
+     * In most cases, the caught exception should be logged and its associated channel should be closed here,
+     * although the implementation of this method can be different depending on what you want to do to
+     * deal with an exceptional situation. For example, you might want to send a response message
+     * with an error code before closing the connection
      */
-//    @Override
-//    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-//        ctx.close();
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        cause.printStackTrace(); // 打印详细异常堆栈信息
+        ctx.close();
 //        System.out.println("异常信息：\r\n" + cause.getMessage());
-//    }
+    }
 
 }

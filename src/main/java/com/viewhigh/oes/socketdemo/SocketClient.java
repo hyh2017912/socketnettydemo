@@ -21,10 +21,9 @@ public class SocketClient {
             Bootstrap bs = new Bootstrap();
             bs.group(eventLoopGroup)
                     .channel(NioSocketChannel.class)
-                    .remoteAddress(new InetSocketAddress(InetAddress.getLocalHost(), 55882))
+                    .remoteAddress(new InetSocketAddress(InetAddress.getLocalHost(), 55884)) // todo ip和端口绑定可以在connect(host,post)中
                     .handler(new SClientInitializer());
             ChannelFuture cf = bs.connect().sync(); // 异步连接服务器
-            System.out.println("服务端连接成功..."); // 连接完成
             cf.channel().closeFuture().sync(); // 异步等待关闭连接channel
             System.out.println("连接已关闭.."); // 关闭完成
         } catch (InterruptedException e) {
