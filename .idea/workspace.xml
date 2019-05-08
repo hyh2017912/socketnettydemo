@@ -2,28 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5611102e-e95e-4402-a510-d6f6b6157cd1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/socketmavennettydemo.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/SClientInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/SServerInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/SocketClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/SocketClientHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/SocketServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/SocketServerHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/example/testdemo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/viewhigh/oes/socketdemo/SClientInitializer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/viewhigh/oes/socketdemo/SServerInitializer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/viewhigh/oes/socketdemo/SocketClient.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/viewhigh/oes/socketdemo/SocketClientHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/viewhigh/oes/socketdemo/SocketServer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/viewhigh/oes/socketdemo/SocketServerHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/viewhigh/oes/socketdemo/example/testdemo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -98,7 +77,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/example/testdemo.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="242">
-              <caret line="58" column="46" selection-start-line="58" selection-start-column="46" selection-end-line="58" selection-end-column="46" />
+              <caret line="58" column="52" lean-forward="true" selection-start-line="58" selection-start-column="52" selection-end-line="58" selection-end-column="52" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -189,7 +168,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557226487783" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557276829676" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -241,15 +220,45 @@
       <option name="presentableId" value="Default" />
       <updated>1557219544983</updated>
       <workItem from="1557219547754" duration="2622000" />
-      <workItem from="1557222182842" duration="4120000" />
+      <workItem from="1557222182842" duration="4465000" />
     </task>
+    <task id="LOCAL-00001" summary="first">
+      <created>1557226747507</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1557226747507</updated>
+    </task>
+    <task id="LOCAL-00002" summary="first">
+      <created>1557226837455</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1557226837455</updated>
+    </task>
+    <task id="LOCAL-00003" summary="first">
+      <created>1557226848877</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1557226848877</updated>
+    </task>
+    <task id="LOCAL-00004" summary="first">
+      <created>1557226860685</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1557226860685</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6742000" />
+    <option name="totallyTimeSpent" value="7087000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2533512" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -267,13 +276,13 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.35055867" />
+      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.50139666" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.33333334" />
       <window_info anchor="bottom" id="Java Enterprise" order="11" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
-      <window_info anchor="bottom" id="Version Control" order="13" />
+      <window_info anchor="bottom" id="Version Control" order="13" weight="0.36173186" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -287,6 +296,36 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="first" />
+    <option name="LAST_COMMIT_MESSAGE" value="first" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/SocketClientHandler" />
@@ -403,7 +442,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/example/testdemo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
-          <caret line="58" column="46" selection-start-line="58" selection-start-column="46" selection-end-line="58" selection-end-column="46" />
+          <caret line="58" column="52" lean-forward="true" selection-start-line="58" selection-start-column="52" selection-end-line="58" selection-end-column="52" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
