@@ -31,8 +31,9 @@ public class SocketServer {
                     .childHandler(new SServerInitializer());
             ChannelFuture cf = sb.bind(55883).sync(); // todo 服务器异步创建绑定,也可以在这里绑定端口,可以绑定多个端口
             ChannelFuture cf1 = sb.bind(55884).sync();
-            System.out.println(SocketServer.class + " 启动正在监听： " + cf.channel().localAddress());
+            System.out.println(SocketServer.class + " 启动正在监听： " + cf.channel().localAddress() + " ; " + cf1.channel().localAddress());
             cf.channel().closeFuture().sync(); // 关闭服务器通道
+            cf1.channel().closeFuture().sync(); // 关闭服务器通道
             System.out .println("服务器通道已关闭！");
         } catch (InterruptedException e) {
             e.printStackTrace();
