@@ -12,6 +12,7 @@ import io.netty.util.CharsetUtil;
 public class SServerInitializer extends ChannelInitializer<SocketChannel> {
     @Override
     protected void initChannel(SocketChannel socketChannel) throws Exception {
+        System.out .println("服务器----Initializer");
         ChannelPipeline pipeline = socketChannel.pipeline();
 
         pipeline.addLast(new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE,0,4,0,4));

@@ -33,11 +33,13 @@ public class SocketServer {
             ChannelFuture cf = sb.bind().sync(); // 服务器异步创建绑定
             System.out.println(SocketServer.class + " 启动正在监听： " + cf.channel().localAddress());
             cf.channel().closeFuture().sync(); // 关闭服务器通道
+            System.out .println("服务器通道已关闭！");
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
             workerGroup.shutdownGracefully().sync(); // 释放线程池资源
             bossGroup.shutdownGracefully().sync();
+            System.out .println("服务器资源已关闭！");
         }
 
     }
