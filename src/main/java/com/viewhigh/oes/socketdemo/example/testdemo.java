@@ -3,8 +3,6 @@ package com.viewhigh.oes.socketdemo.example;
 import com.viewhigh.oes.socketdemo.SocketClient;
 import com.viewhigh.oes.socketdemo.SocketServer;
 
-import java.io.IOException;
-import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 

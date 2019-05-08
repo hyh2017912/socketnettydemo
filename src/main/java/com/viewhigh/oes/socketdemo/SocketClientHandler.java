@@ -1,16 +1,15 @@
 package com.viewhigh.oes.socketdemo;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufUtil;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.CharsetUtil;
 
-import java.nio.charset.Charset;
 import java.time.LocalDateTime;
+import java.util.Scanner;
 
 public class SocketClientHandler extends SimpleChannelInboundHandler<String> {
+    private static Scanner inputScanner = new Scanner(System.in);
     @Override
     protected void messageReceived(ChannelHandlerContext ctx, String msg){
         //服务端的远程地址
@@ -26,7 +25,9 @@ public class SocketClientHandler extends SimpleChannelInboundHandler<String> {
     public void channelActive(ChannelHandlerContext ctx){
         System.out.println("客户端与服务端通道-开启：" + ctx.channel().localAddress() + "channelActive");
 
-        String sendInfo = "Hello 这里是客户端  你好啊！";
+//        String sendInfo = "Hello 这里是客户端  你好啊！";
+        System.out.println("请输入你要发送的信息，并按回车键确认发送");
+        String sendInfo = inputScanner.nextLine();
         System.out.println("客户端准备发送的数据包：" + sendInfo);
         ctx.writeAndFlush(Unpooled.copiedBuffer(sendInfo, CharsetUtil.UTF_8)); // 必须有flush
 

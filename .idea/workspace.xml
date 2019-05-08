@@ -3,12 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="5611102e-e95e-4402-a510-d6f6b6157cd1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/SServerInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/SServerInitializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/SocketClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/SocketClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/SocketServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/SocketServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/SocketServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/SocketServerHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/viewhigh/oes/socketdemo/SServerInitializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/viewhigh/oes/socketdemo/SServerInitializer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/viewhigh/oes/socketdemo/SocketServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/viewhigh/oes/socketdemo/SocketServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/example/testdemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/example/testdemo.java" afterDir="false" />
     </list>
     <list id="7e22d2db-986b-4f5c-8e42-774be0c60125" name="first" comment="">
       <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
@@ -49,8 +46,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/SocketServerHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="72" column="101" selection-start-line="72" selection-start-column="101" selection-end-line="72" selection-end-column="101" />
+            <state relative-caret-position="150">
+              <caret line="85" column="54" lean-forward="true" selection-start-line="85" selection-start-column="54" selection-end-line="85" selection-end-column="54" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -85,11 +82,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/example/testdemo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="71">
-              <caret line="23" column="30" lean-forward="true" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="-625">
+              <caret line="2" column="48" lean-forward="true" selection-start-line="2" selection-start-column="48" selection-end-line="2" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -97,8 +91,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/SocketClientHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="48" column="42" lean-forward="true" selection-start-line="48" selection-start-column="42" selection-end-line="48" selection-end-column="42" />
+            <state relative-caret-position="250">
+              <caret line="29" column="50" lean-forward="true" selection-start-line="29" selection-start-column="50" selection-end-line="29" selection-end-column="50" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -133,9 +127,9 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/SocketClient.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/SClientInitializer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/example/testdemo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/SocketServer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/SServerInitializer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/example/testdemo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/SocketClientHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/SocketServerHandler.java" />
       </list>
@@ -218,7 +212,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557283787739" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557285079505" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -272,7 +266,7 @@
       <updated>1557219544983</updated>
       <workItem from="1557219547754" duration="2622000" />
       <workItem from="1557222182842" duration="5382000" />
-      <workItem from="1557278016133" duration="5599000" />
+      <workItem from="1557278016133" duration="6904000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <created>1557226747507</created>
@@ -309,11 +303,18 @@
       <option name="project" value="LOCAL" />
       <updated>1557276885912</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="server和client的简单数据交互">
+      <created>1557283842326</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1557283842326</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13603000" />
+    <option name="totallyTimeSpent" value="14908000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
@@ -328,12 +329,12 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.37709498" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3603352" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.50139666" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.5405028" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.33333334" />
@@ -397,7 +398,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first" />
-    <option name="LAST_COMMIT_MESSAGE" value="first" />
+    <MESSAGE value="server和client的简单数据交互" />
+    <option name="LAST_COMMIT_MESSAGE" value="server和client的简单数据交互" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/SocketClientHandler" />
@@ -464,16 +466,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/example/testdemo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="71">
-          <caret line="23" column="30" lean-forward="true" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/../../_maven/repo/io/netty/netty-all/5.0.0.Alpha2/netty-all-5.0.0.Alpha2-sources.jar!/io/netty/buffer/ByteBuf.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2554">
@@ -517,18 +509,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/SocketClientHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="48" column="42" lean-forward="true" selection-start-line="48" selection-start-column="42" selection-end-line="48" selection-end-column="42" />
+        <state relative-caret-position="250">
+          <caret line="29" column="50" lean-forward="true" selection-start-line="29" selection-start-column="50" selection-end-line="29" selection-end-column="50" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/example/testdemo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-625">
+          <caret line="2" column="48" lean-forward="true" selection-start-line="2" selection-start-column="48" selection-end-line="2" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/viewhigh/oes/socketdemo/SocketServerHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="72" column="101" selection-start-line="72" selection-start-column="101" selection-end-line="72" selection-end-column="101" />
+        <state relative-caret-position="150">
+          <caret line="85" column="54" lean-forward="true" selection-start-line="85" selection-start-column="54" selection-end-line="85" selection-end-column="54" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
