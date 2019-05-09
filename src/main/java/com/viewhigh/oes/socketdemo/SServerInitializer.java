@@ -14,7 +14,7 @@ public class SServerInitializer extends ChannelInitializer<SocketChannel> {
     protected void initChannel(SocketChannel socketChannel) throws Exception {
         System.out .println("服务器----Initializer");
         ChannelPipeline pipeline = socketChannel.pipeline();
-
+        // 这里的解码器参数配置，两端保持一直
         pipeline.addLast(new LengthFieldBasedFrameDecoder(1024,0,4,0,4));
         pipeline.addLast(new LengthFieldPrepender(4));
         //字符串解码

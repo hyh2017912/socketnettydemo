@@ -23,6 +23,7 @@ public class SocketServer {
             sb.group(bossGroup, workerGroup) // 绑定两个线程组
                     .channel(NioServerSocketChannel.class) //指定nio模式
                     .localAddress(55882) // 端口可以不在这里绑定,后面的绑定会覆盖这里
+//                    .option(ChannelOption.SO_LINGER, 5)  // 非阻塞时不设置改参数和超时时间
                     .option(ChannelOption.SO_BACKLOG, 32) // 设置tcp缓冲区
                     .option(ChannelOption.SO_SNDBUF, 128) //设置发送缓冲区
                     .option(ChannelOption.SO_RCVBUF, 256) //设置接收缓冲区

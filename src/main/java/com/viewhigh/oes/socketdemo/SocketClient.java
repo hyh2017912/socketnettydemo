@@ -2,6 +2,7 @@ package com.viewhigh.oes.socketdemo;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -21,6 +22,9 @@ public class SocketClient {
             Bootstrap bs = new Bootstrap();
             bs.group(eventLoopGroup)
                     .channel(NioSocketChannel.class)
+                    .option(ChannelOption.SO_SNDBUF, 128) //设置发送缓冲区
+                    .option(ChannelOption.SO_RCVBUF, 256) //设置接收缓冲区
+                    .option(ChannelOption.SO_KEEPALIVE, true) //保持连接
                     .remoteAddress(new InetSocketAddress(InetAddress.getLocalHost(), 55884)) // todo ip和端口绑定可以在connect(host,post)中
                     .handler(new SClientInitializer());
             ChannelFuture cf = bs.connect().sync(); // 异步连接服务器
