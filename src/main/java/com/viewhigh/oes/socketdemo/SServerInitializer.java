@@ -15,7 +15,7 @@ public class SServerInitializer extends ChannelInitializer<SocketChannel> {
         System.out .println("服务器----Initializer");
         ChannelPipeline pipeline = socketChannel.pipeline();
 
-        pipeline.addLast(new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE,0,4,0,4));
+        pipeline.addLast(new LengthFieldBasedFrameDecoder(1024,0,4,0,4));
         pipeline.addLast(new LengthFieldPrepender(4));
         //字符串解码
         pipeline.addLast(new StringDecoder(CharsetUtil.UTF_8));

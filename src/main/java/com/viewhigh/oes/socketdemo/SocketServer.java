@@ -23,9 +23,9 @@ public class SocketServer {
             sb.group(bossGroup, workerGroup) // 绑定两个线程组
                     .channel(NioServerSocketChannel.class) //指定nio模式
                     .localAddress(55882) // 端口可以不在这里绑定,后面的绑定会覆盖这里
-                    .option(ChannelOption.SO_BACKLOG, 1024) // 设置tcp缓冲区
-                    .option(ChannelOption.SO_SNDBUF, 32 * 1024) //设置发送缓冲区
-                    .option(ChannelOption.SO_RCVBUF, 32 * 1024) //设置接收缓冲区
+                    .option(ChannelOption.SO_BACKLOG, 32) // 设置tcp缓冲区
+                    .option(ChannelOption.SO_SNDBUF, 128) //设置发送缓冲区
+                    .option(ChannelOption.SO_RCVBUF, 256) //设置接收缓冲区
                     .option(ChannelOption.SO_KEEPALIVE, true) //保持连接
                     //在服务器端的handler()方法表示对bossGroup起作用，而childHandler表示对wokerGroup起作用
                     .childHandler(new SServerInitializer());
