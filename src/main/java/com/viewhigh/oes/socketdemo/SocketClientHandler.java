@@ -3,8 +3,12 @@ package com.viewhigh.oes.socketdemo;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.handler.timeout.IdleState;
+import io.netty.handler.timeout.IdleStateEvent;
+import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.util.CharsetUtil;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class SocketClientHandler extends SimpleChannelInboundHandler<String> {
@@ -73,5 +77,16 @@ public class SocketClientHandler extends SimpleChannelInboundHandler<String> {
 
     public void closed(ChannelHandlerContext ctx){
         ctx.close();
+    }
+
+    @Override
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+        System.out.println("这里是客户端心跳方法");
+        if (evt instanceof IdleStateEvent){
+            IdleStateEvent e = (IdleStateEvent) evt;
+            HeartCommon.heartHandler(ctx, e);
+        }else{
+            super.userEventTriggered(ctx,evt);
+        }
     }
 }

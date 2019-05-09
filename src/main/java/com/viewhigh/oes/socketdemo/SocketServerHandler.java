@@ -5,6 +5,8 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.handler.timeout.IdleStateEvent;
+import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.util.CharsetUtil;
 import io.netty.util.ReferenceCountUtil;
 
@@ -94,6 +96,12 @@ public class SocketServerHandler extends SimpleChannelInboundHandler {
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx){
         System.out.println("服务端接收数据完毕..");
+        System.out.println("测试心跳，休眠12秒");
+        try {
+            Thread.sleep(12000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         // 第一种方法：写一个空的buf，并刷新写出区域。完成后关闭sock channel连接。
 //        ctx.writeAndFlush(Unpooled.EMPTY_BUFFER).addListener(ChannelFutureListener.CLOSE);  // 注释掉 ，写一个非空的buf
         // .addListener(ChannelFutureListener.CLOSE) 接收信息后是否关闭连接
@@ -118,6 +126,17 @@ public class SocketServerHandler extends SimpleChannelInboundHandler {
         cause.printStackTrace(); // 打印详细异常堆栈信息
         ctx.close();
 //        System.out.println("异常信息：\r\n" + cause.getMessage());
+    }
+
+    @Override
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+        System.out.println("这里是服务端心跳方法");
+        if (evt instanceof IdleStateEvent){
+            IdleStateEvent e = (IdleStateEvent) evt;
+            HeartCommon.heartHandler(ctx, e);
+        }else{
+            super.userEventTriggered(ctx,evt);
+        }
     }
 
 }
