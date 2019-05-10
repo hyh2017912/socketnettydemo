@@ -2,6 +2,7 @@ package com.viewhigh.oes.socketdemo;
 
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.EventLoop;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
@@ -10,8 +11,10 @@ import io.netty.util.CharsetUtil;
 
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class SocketClientHandler extends SimpleChannelInboundHandler<String> {
+    private SocketClient socketClient = new SocketClient();
     private static Scanner inputScanner = new Scanner(System.in);
     @Override
     protected void messageReceived(ChannelHandlerContext ctx, String msg){
@@ -22,26 +25,39 @@ public class SocketClientHandler extends SimpleChannelInboundHandler<String> {
     }
 
     /**
-     * 向服务端发送数据
+     * 向服务端发送数据，发送string
      */
     @Override
     public void channelActive(ChannelHandlerContext ctx){
         System.out.println("客户端与服务端通道-开启：" + ctx.channel().localAddress() + "channelActive");
         System.out.println("服务端连接成功..."); // 连接完成
-//        String sendInfo = "Hello 这里是客户端  你好啊！";
         this.sendMsg(ctx);
     }
 
     /**
      * channelInactive
-     *
      * channel 通道 Inactive 不活跃的
-     *
      * 当客户端主动断开服务端的链接后，这个通道就是不活跃的。也就是说客户端与服务端的关闭了通信通道并且不可以传输数据
      *
      */
-    public void channelInactive(ChannelHandlerContext ctx) {
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         System.out.println("客户端与服务端通道-关闭：" + ctx.channel().localAddress() + "channelInactive");
+
+        // todo 使用过程中断线重连
+        final EventLoop eventLoop = ctx.channel().eventLoop();
+        System.out.println("开始掉线重连01");
+        eventLoop.schedule(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("开始掉线重连02");
+                try {
+                    socketClient.initSocketClient();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }, 2, TimeUnit.SECONDS);
+        super.channelInactive(ctx);
     }
 
     @Override

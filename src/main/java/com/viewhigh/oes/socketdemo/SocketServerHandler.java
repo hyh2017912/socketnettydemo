@@ -6,12 +6,9 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.timeout.IdleStateEvent;
-import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.util.CharsetUtil;
-import io.netty.util.ReferenceCountUtil;
 
 import java.io.UnsupportedEncodingException;
-import java.util.UUID;
 
 public class SocketServerHandler extends SimpleChannelInboundHandler {
      // SimpleChannelInboundHandler 继承ChannelHandlerAdapter
@@ -19,17 +16,13 @@ public class SocketServerHandler extends SimpleChannelInboundHandler {
     @Override
     protected void messageReceived(ChannelHandlerContext ctx, Object msg){
         //打印出客户端地址
-//        System.out.println(ctx.channel().remoteAddress()+", "+msg);
-//        ctx.channel().writeAndFlush("form server: "+ UUID.randomUUID());
+       /* System.out.println(ctx.channel().remoteAddress()+", "+msg);
+        ctx.channel().writeAndFlush("form server: "+ UUID.randomUUID());*/
     }
 
     /*
-     * channelAction
-     *
      * channel 通道 action 活跃的
-     *
      * 当客户端主动链接服务端的链接后，这个通道就是活跃的了。也就是客户端与服务端建立了通信通道并且可以传输数据
-     *
      */
     public void channelActive(ChannelHandlerContext ctx){
         System.out.println(ctx.channel().localAddress().toString() + " 通道已激活！");
@@ -37,35 +30,12 @@ public class SocketServerHandler extends SimpleChannelInboundHandler {
 
     /*
      * channelInactive
-     *
      * channel 通道 Inactive 不活跃的
-     *
      * 当客户端主动断开服务端的链接后，这个通道就是不活跃的。也就是说客户端与服务端的关闭了通信通道并且不可以传输数据
-     *
      */
     public void channelInactive(ChannelHandlerContext ctx){
         System.out.println(ctx.channel().localAddress().toString() + " 通道不活跃！");
         // 关闭流
-
-    }
-
-    /**
-     *
-     * @author Taowd
-     * TODO  此处用来处理收到的数据中含有中文的时  出现乱码的问题
-     * 2017年8月31日 下午7:57:28
-     * @param buf
-     * @return
-     */
-    private String getMessage(ByteBuf buf) {
-        byte[] con = new byte[buf.readableBytes()];
-        buf.readBytes(con);
-        try {
-            return new String(con, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
     /**
@@ -125,7 +95,6 @@ public class SocketServerHandler extends SimpleChannelInboundHandler {
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         cause.printStackTrace(); // 打印详细异常堆栈信息
         ctx.close();
-//        System.out.println("异常信息：\r\n" + cause.getMessage());
     }
 
     @Override
