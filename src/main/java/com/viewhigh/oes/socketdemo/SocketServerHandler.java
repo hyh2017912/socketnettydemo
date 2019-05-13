@@ -124,11 +124,11 @@ public class SocketServerHandler extends SimpleChannelInboundHandler {
             System.out.println(" [server]读空闲超过3次，关闭连接：" + id);
             ctx.close();
         }
-        if (readerIdleTime > 3){
+        if (writerIdleTime > 3){
             System.out.println(" [server]写空闲超过3次，关闭连接：" + id);
             ctx.close();
         }
-        if (readerIdleTime > 3){
+        if (allIdleTime > 3){
             System.out.println(" [server]读写空闲超过3次，关闭连接：" + id);
             ctx.close();
         }
