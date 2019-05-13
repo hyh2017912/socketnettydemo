@@ -1,5 +1,6 @@
-package com.viewhigh.oes.socketdemo;
+package com.viewhigh.oes.socketdemo.common;
 
+import com.viewhigh.oes.socketdemo.SocketClient;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.EventLoop;

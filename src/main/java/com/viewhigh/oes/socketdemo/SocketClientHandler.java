@@ -1,15 +1,14 @@
 package com.viewhigh.oes.socketdemo;
 
+import com.viewhigh.oes.socketdemo.common.HeartCommon;
+import com.viewhigh.oes.socketdemo.utils.SockerUtils;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.EventLoop;
 import io.netty.channel.SimpleChannelInboundHandler;
-import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
-import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.util.CharsetUtil;
 
-import java.io.IOException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -20,8 +19,8 @@ public class SocketClientHandler extends SimpleChannelInboundHandler<String> {
     protected void messageReceived(ChannelHandlerContext ctx, String msg){
         //服务端的远程地址
 //        System.out.println(ctx.channel().remoteAddress());
-//        System.out.println("client output: "+msg);
-//        ctx.writeAndFlush("from client: "+ LocalDateTime.now());
+//        System.out.println("sclient output: "+msg);
+//        ctx.writeAndFlush("from sclient: "+ LocalDateTime.now());
     }
 
     /**
@@ -31,7 +30,7 @@ public class SocketClientHandler extends SimpleChannelInboundHandler<String> {
     public void channelActive(ChannelHandlerContext ctx){
         System.out.println("客户端与服务端通道-开启：" + ctx.channel().localAddress() + "channelActive");
         System.out.println("服务端连接成功..."); // 连接完成
-        this.sendMsg(ctx);
+        new Thread(() -> SockerUtils.sendMsg(ctx,"服务端")).start();
     }
 
     /**
@@ -70,8 +69,7 @@ public class SocketClientHandler extends SimpleChannelInboundHandler<String> {
         System.out.println("客户端接收到服务端信息：" + msg);
 //        ctx.write(msg);
 //        ctx.flush();  // 也可以直接使用writeAndFlush()方法
-        this.sendMsg(ctx);
-    }
+        new Thread(() -> SockerUtils.sendMsg(ctx,"服务端")).start();    }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
@@ -84,15 +82,11 @@ public class SocketClientHandler extends SimpleChannelInboundHandler<String> {
         System.out.println("请输入你要发送的信息，并按回车键确认发送");
         String sendInfo = inputScanner.nextLine();
         if ("exit".equalsIgnoreCase(sendInfo)){
-            this.closed(ctx);
+            SockerUtils.closed(ctx);
             return;
         }
         System.out.println("客户端准备发送的数据包：" + sendInfo);
         ctx.writeAndFlush(Unpooled.copiedBuffer(sendInfo, CharsetUtil.UTF_8)); // 必须有flush
-    }
-
-    public void closed(ChannelHandlerContext ctx){
-        ctx.close();
     }
 
     @Override

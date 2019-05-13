@@ -1,14 +1,12 @@
 package com.viewhigh.oes.socketdemo;
 
-import io.netty.buffer.ByteBuf;
+import com.viewhigh.oes.socketdemo.common.HeartCommon;
+import com.viewhigh.oes.socketdemo.utils.SockerUtils;
 import io.netty.buffer.Unpooled;
-import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.util.CharsetUtil;
-
-import java.io.UnsupportedEncodingException;
 
 public class SocketServerHandler extends SimpleChannelInboundHandler {
      // SimpleChannelInboundHandler 继承ChannelHandlerAdapter
@@ -17,7 +15,7 @@ public class SocketServerHandler extends SimpleChannelInboundHandler {
     protected void messageReceived(ChannelHandlerContext ctx, Object msg){
         //打印出客户端地址
        /* System.out.println(ctx.channel().remoteAddress()+", "+msg);
-        ctx.channel().writeAndFlush("form server: "+ UUID.randomUUID());*/
+        ctx.channel().writeAndFlush("form sserver: "+ UUID.randomUUID());*/
     }
 
     /*
@@ -26,6 +24,7 @@ public class SocketServerHandler extends SimpleChannelInboundHandler {
      */
     public void channelActive(ChannelHandlerContext ctx){
         System.out.println(ctx.channel().localAddress().toString() + " 通道已激活！");
+        new Thread(() -> SockerUtils.sendMsg(ctx,"服务端")).start();
     }
 
     /*
@@ -40,14 +39,14 @@ public class SocketServerHandler extends SimpleChannelInboundHandler {
 
     /**
      * 功能：读取客户端发送过来的信息
-     * 调用时刻：This method is called with the received message, whenever new data is received from a client.
+     * 调用时刻：This method is called with the received message, whenever new data is received from a sclient.
      *  注意：参考光放文档实现，关闭资源
      */
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg){
         // 第一种：接收字符串时的处理
         /*try{
-//        ByteBuf buf = ((ByteBuf) msg);  // TODO  当发送String 时，此处会转换异常，但官方文档示例如此，;server 和 client 的handler中都存在，避免他
+//        ByteBuf buf = ((ByteBuf) msg);  // TODO  当发送String 时，此处会转换异常，但官方文档示例如此，;sserver 和 sclient 的handler中都存在，避免他
 //        String rev = getMessage(((ByteBuf) msg));
             System.out.println("服务器收到客户端数据:" + msg); // 输出控制台时，需要手动释放信息即finally中代码
         }finally {

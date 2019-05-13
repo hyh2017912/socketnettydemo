@@ -1,5 +1,6 @@
 package com.viewhigh.oes.socketdemo;
 
+import com.viewhigh.oes.socketdemo.common.InfoConfig;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
@@ -16,7 +17,7 @@ public class SServerInitializer extends ChannelInitializer<SocketChannel> {
         System.out .println("服务器----Initializer");
         ChannelPipeline pipeline = socketChannel.pipeline();
         // 心跳事件
-        pipeline.addLast(new IdleStateHandler(10,0,0));
+        pipeline.addLast(new IdleStateHandler(InfoConfig.HEART_INTERVAL_TIME_SERVER.getConfig(),0,0));
         // 这里的解码器参数配置，两端保持一直
         pipeline.addLast(new LengthFieldBasedFrameDecoder(1024,0,4,0,4));
         pipeline.addLast(new LengthFieldPrepender(4));

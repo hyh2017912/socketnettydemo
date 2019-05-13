@@ -1,4 +1,4 @@
-package com.viewhigh.oes.socketdemo;
+package com.viewhigh.oes.socketdemo.common;
 
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
