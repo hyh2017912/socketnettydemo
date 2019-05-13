@@ -19,7 +19,7 @@ public class SockerUtils {
             return;
         }*/
         try {
-            Thread.sleep(10000);
+            Thread.sleep(5000);
             System.out.println("开始休眠。。。");
         } catch (InterruptedException e) {
             e.printStackTrace();
