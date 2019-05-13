@@ -30,7 +30,7 @@ public class SocketClientHandler extends SimpleChannelInboundHandler<String> {
     public void channelActive(ChannelHandlerContext ctx){
         System.out.println("客户端与服务端通道-开启：" + ctx.channel().localAddress() + "channelActive");
         System.out.println("服务端连接成功..."); // 连接完成
-        new Thread(() -> SockerUtils.sendMsg(ctx,"服务端")).start();
+        new Thread(() -> SockerUtils.sendMsg(ctx,"客户端首次")).start();
     }
 
     /**
@@ -69,7 +69,8 @@ public class SocketClientHandler extends SimpleChannelInboundHandler<String> {
         System.out.println("客户端接收到服务端信息：" + msg);
 //        ctx.write(msg);
 //        ctx.flush();  // 也可以直接使用writeAndFlush()方法
-        new Thread(() -> SockerUtils.sendMsg(ctx,"服务端")).start();    }
+        SockerUtils.sendMsg(ctx,"客户端重复");
+    }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
@@ -78,7 +79,7 @@ public class SocketClientHandler extends SimpleChannelInboundHandler<String> {
         System.out.println("异常退出:" + cause.getMessage());
     }
 
-    public void sendMsg(ChannelHandlerContext ctx){
+/*    public void sendMsg(ChannelHandlerContext ctx){
         System.out.println("请输入你要发送的信息，并按回车键确认发送");
         String sendInfo = inputScanner.nextLine();
         if ("exit".equalsIgnoreCase(sendInfo)){
@@ -87,7 +88,7 @@ public class SocketClientHandler extends SimpleChannelInboundHandler<String> {
         }
         System.out.println("客户端准备发送的数据包：" + sendInfo);
         ctx.writeAndFlush(Unpooled.copiedBuffer(sendInfo, CharsetUtil.UTF_8)); // 必须有flush
-    }
+    }*/
 
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {

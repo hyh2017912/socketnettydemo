@@ -24,7 +24,7 @@ public class SocketServerHandler extends SimpleChannelInboundHandler {
      */
     public void channelActive(ChannelHandlerContext ctx){
         System.out.println(ctx.channel().localAddress().toString() + " 通道已激活！");
-        new Thread(() -> SockerUtils.sendMsg(ctx,"服务端")).start();
+        new Thread(() -> SockerUtils.sendMsg(ctx,"服务端首次")).start();
     }
 
     /*
