@@ -69,7 +69,7 @@ public class SocketClientHandler extends SimpleChannelInboundHandler<String> {
         System.out.println("客户端接收到服务端信息：" + msg);
 //        ctx.write(msg);
 //        ctx.flush();  // 也可以直接使用writeAndFlush()方法
-        SockerUtils.sendMsg(ctx,"客户端重复");
+//        SockerUtils.sendMsg(ctx,"客户端重复");
     }
 
     @Override
