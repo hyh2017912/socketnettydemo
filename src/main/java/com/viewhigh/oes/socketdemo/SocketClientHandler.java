@@ -100,7 +100,7 @@ public class SocketClientHandler extends SimpleChannelInboundHandler<String> {
         System.out.println("这里是客户端心跳方法");
         if (evt instanceof IdleStateEvent){
             IdleStateEvent e = (IdleStateEvent) evt;
-            HeartCommon.heartHandler(ctx, e);
+            HeartCommon.heartHandler(ctx, e, "客户端");
         }else{
             super.userEventTriggered(ctx,evt);
         }

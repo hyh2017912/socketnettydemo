@@ -8,28 +8,31 @@ import java.io.IOException;
 
 public class HeartCommon extends ChannelHandlerAdapter {
 
-    public static void handleReaderIdle(ChannelHandlerContext ctx) {
-        System.out.println("这里是handleReaderIdle");
+    public static void handleReaderIdle(ChannelHandlerContext ctx, String s) {
+        System.out.println("这里是handleReaderIdle：连接30秒内无交互，" + s + "将关闭无效连接:" + ctx.name());
+        ctx.close();
     }
 
-    public static void handleWriterIdle(ChannelHandlerContext ctx) {
-        System.out.println("这里是handleWriterIdle");
+    public static void handleWriterIdle(ChannelHandlerContext ctx, String s) {
+        System.out.println("这里是handleWriterIdle：连接30秒内无交互，" + s + "将关闭无效连接:" + ctx.name());
+        ctx.close();
     }
 
-    public static void handleAllIdle(ChannelHandlerContext ctx) {
-        System.out.println("这里是handleAllIdle");
+    public static void handleAllIdle(ChannelHandlerContext ctx, String s) {
+        System.out.println("这里是handleAllIdle：连接30秒内无交互，" + s + "将关闭无效连接:" + ctx.name());
+        ctx.close();
     }
 
-    public static void heartHandler(ChannelHandlerContext ctx, IdleStateEvent e) throws IOException {
+    public static void heartHandler(ChannelHandlerContext ctx, IdleStateEvent e, String s) throws IOException {
         switch (e.state()) {
             case READER_IDLE:
-                handleReaderIdle(ctx);
+                handleReaderIdle(ctx,s);
                 break;
             case WRITER_IDLE:
-                handleWriterIdle(ctx);
+                handleWriterIdle(ctx,s);
                 break;
             case ALL_IDLE:
-                handleAllIdle(ctx);
+                handleAllIdle(ctx,s);
                 break;
             default:
                 throw new IOException("未知的IdleStateEvent状态");

@@ -66,9 +66,9 @@ public class SocketServerHandler extends SimpleChannelInboundHandler {
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx){
         System.out.println("服务端接收数据完毕..");
-        System.out.println("测试心跳，休眠12秒");
+//        System.out.println("测试心跳，休眠12秒");
         try {
-            Thread.sleep(12000);
+            Thread.sleep(0);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -102,7 +102,7 @@ public class SocketServerHandler extends SimpleChannelInboundHandler {
         System.out.println("这里是服务端心跳方法");
         if (evt instanceof IdleStateEvent){
             IdleStateEvent e = (IdleStateEvent) evt;
-            HeartCommon.heartHandler(ctx, e);
+            HeartCommon.heartHandler(ctx, e, "服务端");
         }else{
             super.userEventTriggered(ctx,evt);
         }
