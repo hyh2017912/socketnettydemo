@@ -9,19 +9,23 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class HeartCommon extends ChannelHandlerAdapter {
-    private static Map<String,Integer>  heartTimes = new ConcurrentHashMap<>();
+//    private static Map<String,Integer>  heartTimes = new ConcurrentHashMap<>();
+    private static ThreadLocal<Integer> tl = new ThreadLocal<Integer>(){
+    @Override
+    protected Integer initialValue() {
+        return 0;
+    }
+};
     public static void handleReaderIdle(ChannelHandlerContext ctx, String s) {
-
-        if (heartTimes.get("id") == null){
-            heartTimes.put("id",1);
-            System.out.println("这里是handleReaderIdle：进行第" + heartTimes.get("id") + "次心跳");
-        }else if (heartTimes.get("id") < 3){
-            heartTimes.put("id",heartTimes.get("id") + 1);
-            System.out.println("这里是handleReaderIdle：进行第" + heartTimes.get("id") + "次心跳");
+        if (tl.get() == 0){
+            tl.set(1);
+            System.out.println("这里是handleReaderIdle：进行第" + tl.get() + "次心跳");
+        }else if (tl.get() < InfoConfig.HEART_INTERVAL_FREQUENCY.getConfig() - 1){
+            tl.set(tl.get() + 1);
+            System.out.println("这里是handleReaderIdle：进行第" + tl.get() + "次心跳");
         }else {
-            System.out.println("这里是handleReaderIdle：进行第" + heartTimes.get("id") + "次心跳结束," + s + "将关闭无效连接:" + ctx.name());
+            System.out.println("这里是handleReaderIdle：进行第" + (tl.get() + 1) + "次心跳结束," + s + "将关闭无效连接:" + ctx.name());
             ctx.close();
-            heartTimes.remove("id");
         }
     }
 

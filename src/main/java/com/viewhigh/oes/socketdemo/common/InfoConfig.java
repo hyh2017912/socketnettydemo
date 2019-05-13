@@ -3,7 +3,7 @@ package com.viewhigh.oes.socketdemo.common;
 public enum InfoConfig {
     SERVER_PORT_01(1,58883,"服务端端口号"),
     SERVER_PORT_02(2,58884,"服务端端口号"),
-    HEART_INTERVAL_TIME_SERVER(3,30,"服务端心跳时间间隔"),
+    HEART_INTERVAL_TIME_SERVER(3,10,"服务端心跳时间间隔"),
     HEART_INTERVAL_TIME_CLIENT(3,120,"客户端心跳时间间隔"),
     HEART_INTERVAL_FREQUENCY(4,3,"心跳间隔次数"),
 
