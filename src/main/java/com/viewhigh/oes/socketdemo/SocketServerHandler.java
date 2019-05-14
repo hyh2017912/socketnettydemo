@@ -11,6 +11,7 @@ public class SocketServerHandler extends SimpleChannelInboundHandler {
     private int readerIdleTime = 1;
     private int writerIdleTime = 1;
     private int allIdleTime = 1;
+    private String channelId;
 
     @Override
     protected void messageReceived(ChannelHandlerContext ctx, Object msg){
@@ -21,7 +22,8 @@ public class SocketServerHandler extends SimpleChannelInboundHandler {
      * 当客户端主动链接服务端的链接后，这个通道就是活跃的了。也就是客户端与服务端建立了通信通道并且可以传输数据
      */
     public void channelActive(ChannelHandlerContext ctx){
-        System.out.println(ctx.channel().localAddress().toString() + " 通道已激活！");
+        channelId = "0x" + ctx.channel().id();
+        System.out.println(ctx.channel().localAddress().toString() + " 通道" + channelId + "已激活！");
 //        new Thread(() -> SockerUtils.sendMsg(ctx,"服务端首次")).start();
     }
 
@@ -31,7 +33,7 @@ public class SocketServerHandler extends SimpleChannelInboundHandler {
      * 当客户端主动断开服务端的链接后，这个通道就是不活跃的。也就是说客户端与服务端的关闭了通信通道并且不可以传输数据
      */
     public void channelInactive(ChannelHandlerContext ctx){
-        System.out.println(ctx.channel().localAddress().toString() + " 通道不活跃！");
+        System.out.println(ctx.channel().localAddress().toString() + " 通道" + channelId + "不活跃！");
         // 关闭流
     }
 
@@ -52,7 +54,8 @@ public class SocketServerHandler extends SimpleChannelInboundHandler {
         }*/
 
         // 第一种：接收字符串时的处理,此时netty将自动释放信息
-        System.out.println("服务器收到客户端数据:" + msg);
+        System.out.println("服务器收到客户端" + channelId + "数据:" + msg);
+        readerIdleTime = 1;
 //        ctx.write(msg);
 //        ctx.flush();  // 也可以直接使用writeAndFlush()方法
     }
@@ -72,7 +75,7 @@ public class SocketServerHandler extends SimpleChannelInboundHandler {
 //        ctx.writeAndFlush(Unpooled.EMPTY_BUFFER).addListener(ChannelFutureListener.CLOSE);  // 注释掉 ，写一个非空的buf
         // .addListener(ChannelFutureListener.CLOSE) 接收信息后是否关闭连接
 //        ctx.writeAndFlush(Unpooled.copiedBuffer("你好，客户端，已收到你发送的信息", CharsetUtil.UTF_8)).addListener(ChannelFutureListener.CLOSE);
-        ctx.writeAndFlush(Unpooled.copiedBuffer("你好，客户端，已收到你发送的信息", CharsetUtil.UTF_8));
+        ctx.writeAndFlush(Unpooled.copiedBuffer("你好" + channelId + "已收到你发送的信息", CharsetUtil.UTF_8));
         // ctx.flush();
         // 第二种方法：在client端关闭channel连接，这样的话，会触发两次channelReadComplete方法。
         // ctx.flush().close().sync(); // 第三种：改成这种写法也可以，但是这中写法，没有第一种方法的好。
@@ -95,18 +98,18 @@ public class SocketServerHandler extends SimpleChannelInboundHandler {
 
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
-        ChannelId id = ctx.channel().id();
+//        ChannelId id = ctx.channel().id();
         if (evt instanceof IdleStateEvent){
             IdleStateEvent e = (IdleStateEvent) evt;
             switch (e.state()) {
                 case READER_IDLE:
-                    System.out.println("通道0x" + id + "读空闲第" + readerIdleTime ++ + "心跳");
+                    System.out.println("通道" + channelId + "读空闲第" + readerIdleTime ++ + "心跳");
                     break;
                 case WRITER_IDLE:
-                    System.out.println("通道0x" + id + "写空闲第" + writerIdleTime ++ + "心跳");
+                    System.out.println("通道" + channelId + "写空闲第" + writerIdleTime ++ + "心跳");
                     break;
                 case ALL_IDLE:
-                    System.out.println("通道0x" + id + "读写空闲第" + allIdleTime ++ + "心跳");
+                    System.out.println("通道" + channelId + "读写空闲第" + allIdleTime ++ + "心跳");
                     break;
                 default:
                     throw new IOException("未知的IdleStateEvent状态");
@@ -115,15 +118,15 @@ public class SocketServerHandler extends SimpleChannelInboundHandler {
             super.userEventTriggered(ctx,evt);
         }
         if (readerIdleTime > 3){
-            System.out.println(" [server]读空闲超过3次，关闭连接：" + id);
+            System.out.println(" [server]读空闲超过3次，关闭连接：" + channelId);
             ctx.close();
         }
         if (writerIdleTime > 3){
-            System.out.println(" [server]写空闲超过3次，关闭连接：" + id);
+            System.out.println(" [server]写空闲超过3次，关闭连接：" + channelId);
             ctx.close();
         }
         if (allIdleTime > 3){
-            System.out.println(" [server]读写空闲超过3次，关闭连接：" + id);
+            System.out.println(" [server]读写空闲超过3次，关闭连接：" + channelId);
             ctx.close();
         }
     }
