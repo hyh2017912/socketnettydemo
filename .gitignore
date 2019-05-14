@@ -12,6 +12,8 @@
 hs_err_pid*
 /bin/
 .idea/workspace.xml
+*.xml
 *.iml
 .idea
 target
+*.class
