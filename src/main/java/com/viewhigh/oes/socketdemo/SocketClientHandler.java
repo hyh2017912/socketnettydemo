@@ -1,18 +1,20 @@
 package com.viewhigh.oes.socketdemo;
 
-import com.viewhigh.oes.socketdemo.common.HeartCommon;
 import com.viewhigh.oes.socketdemo.utils.SockerUtils;
-import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelId;
 import io.netty.channel.EventLoop;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.timeout.IdleStateEvent;
-import io.netty.util.CharsetUtil;
 
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class SocketClientHandler extends SimpleChannelInboundHandler<String> {
+    private int readerIdleTime = 1;
+    private int writerIdleTime = 1;
+    private int allIdleTime = 1;
     private SocketClient socketClient = new SocketClient();
     private static Scanner inputScanner = new Scanner(System.in);
     @Override
@@ -69,7 +71,7 @@ public class SocketClientHandler extends SimpleChannelInboundHandler<String> {
         System.out.println("客户端接收到服务端信息：" + msg);
 //        ctx.write(msg);
 //        ctx.flush();  // 也可以直接使用writeAndFlush()方法
-        SockerUtils.sendMsg(ctx,"客户端重复");
+//        SockerUtils.sendMsg(ctx,"客户端重复");
     }
 
     @Override
@@ -92,12 +94,36 @@ public class SocketClientHandler extends SimpleChannelInboundHandler<String> {
 
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
-        System.out.println("这里是客户端心跳方法");
+        ChannelId id = ctx.channel().id();
         if (evt instanceof IdleStateEvent){
             IdleStateEvent e = (IdleStateEvent) evt;
-            HeartCommon.heartHandler(ctx, e, "客户端");
+            switch (e.state()) {
+                case READER_IDLE:
+                    System.out.println("通道0x" + id + "读空闲第" + readerIdleTime ++ + "心跳");
+                    break;
+                case WRITER_IDLE:
+                    System.out.println("通道0x" + id + "写空闲第" + writerIdleTime ++ + "心跳");
+                    break;
+                case ALL_IDLE:
+                    System.out.println("通道0x" + id + "读写空闲第" + allIdleTime ++ + "心跳");
+                    break;
+                default:
+                    throw new IOException("未知的IdleStateEvent状态");
+            }
         }else{
             super.userEventTriggered(ctx,evt);
+        }
+        if (readerIdleTime > 3){
+            System.out.println(" [client]读空闲超过3次，关闭连接：" + id);
+            ctx.close();
+        }
+        if (readerIdleTime > 3){
+            System.out.println(" [client]写空闲超过3次，关闭连接：" + id);
+            ctx.close();
+        }
+        if (readerIdleTime > 3){
+            System.out.println(" [client]读写空闲超过3次，关闭连接：" + id);
+            ctx.close();
         }
     }
 }
