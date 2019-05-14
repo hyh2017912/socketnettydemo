@@ -19,10 +19,6 @@ public class SocketClientHandler extends SimpleChannelInboundHandler<String> {
     private static Scanner inputScanner = new Scanner(System.in);
     @Override
     protected void messageReceived(ChannelHandlerContext ctx, String msg){
-        //服务端的远程地址
-//        System.out.println(ctx.channel().remoteAddress());
-//        System.out.println("sclient output: "+msg);
-//        ctx.writeAndFlush("from sclient: "+ LocalDateTime.now());
     }
 
     /**
@@ -80,17 +76,6 @@ public class SocketClientHandler extends SimpleChannelInboundHandler<String> {
         ctx.close();
         System.out.println("异常退出:" + cause.getMessage());
     }
-
-/*    public void sendMsg(ChannelHandlerContext ctx){
-        System.out.println("请输入你要发送的信息，并按回车键确认发送");
-        String sendInfo = inputScanner.nextLine();
-        if ("exit".equalsIgnoreCase(sendInfo)){
-            SockerUtils.closed(ctx);
-            return;
-        }
-        System.out.println("客户端准备发送的数据包：" + sendInfo);
-        ctx.writeAndFlush(Unpooled.copiedBuffer(sendInfo, CharsetUtil.UTF_8)); // 必须有flush
-    }*/
 
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {

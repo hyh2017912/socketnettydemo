@@ -1,9 +1,7 @@
 package com.viewhigh.oes.socketdemo;
 
 import io.netty.buffer.Unpooled;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelId;
-import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.channel.*;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.util.CharsetUtil;
 
@@ -16,9 +14,6 @@ public class SocketServerHandler extends SimpleChannelInboundHandler {
 
     @Override
     protected void messageReceived(ChannelHandlerContext ctx, Object msg){
-        //打印出客户端地址
-       /* System.out.println(ctx.channel().remoteAddress()+", "+msg);
-        ctx.channel().writeAndFlush("form sserver: "+ UUID.randomUUID());*/
     }
 
     /*
@@ -68,7 +63,6 @@ public class SocketServerHandler extends SimpleChannelInboundHandler {
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx){
         System.out.println("服务端接收数据完毕..");
-//        System.out.println("测试心跳，休眠12秒");
         try {
             Thread.sleep(0);
         } catch (InterruptedException e) {
