@@ -1,6 +1,7 @@
 package com.viewhigh.oes.socketdemo;
 
 import com.viewhigh.oes.socketdemo.utils.SockerUtils;
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelId;
 import io.netty.channel.EventLoop;
@@ -8,6 +9,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.timeout.IdleStateEvent;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -60,14 +62,13 @@ public class SocketClientHandler extends SimpleChannelInboundHandler<String> {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
         System.out.println("读取通道信息..");
-//        ByteBuf buf = msg.readBytes(msg.readableBytes());
-//        ByteBuf buf = ((ByteBuf)msg).readBytes(((ByteBuf)msg).readableBytes());
-//        System.out.println(
-//                "客户端接收到的服务端信息:" + ByteBufUtil.hexDump(buf) + "; 数据包为:" + buf.toString(Charset.forName("utf-8")));
-        System.out.println("客户端接收到服务端信息：" + msg);
+        ByteBuf byteBuf = (ByteBuf)msg;
+        ByteBuf buf = byteBuf.readBytes(byteBuf.readableBytes());
+
+        System.out.println("客户端接收到服务端信息：" + buf.toString(Charset.forName("utf-8")));
 //        ctx.write(msg);
 //        ctx.flush();  // 也可以直接使用writeAndFlush()方法
-//        SockerUtils.sendMsg(ctx,"客户端重复");
+        SockerUtils.sendMsg(ctx,"客户端重复");
     }
 
     @Override
