@@ -26,7 +26,8 @@ public class SockerUtils {
         }
         String sendInfo = "数据内容：" + s + ",时间：" + System.currentTimeMillis();
         System.out.println( s + "准备发送的数据包：" + sendInfo);
-        ctx.writeAndFlush(Unpooled.copiedBuffer(sendInfo, CharsetUtil.UTF_8)); // 必须有flush
+//        ctx.writeAndFlush(Unpooled.copiedBuffer(sendInfo, CharsetUtil.UTF_8)); // 必须有flush
+        ctx.writeAndFlush(Unpooled.copiedBuffer(sendInfo.getBytes())); // 必须有flush
     }
 
     public static void closed(ChannelHandlerContext ctx){

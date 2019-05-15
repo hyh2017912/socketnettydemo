@@ -1,11 +1,15 @@
 package com.viewhigh.oes.socketdemo;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufAllocator;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.util.CharsetUtil;
+import io.netty.util.ReferenceCountUtil;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 
 public class SocketServerHandler extends SimpleChannelInboundHandler {
     private int readerIdleTime = 1;
@@ -44,18 +48,18 @@ public class SocketServerHandler extends SimpleChannelInboundHandler {
      */
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg){
+        // 重置心跳
+        readerIdleTime = 1;
+        allIdleTime = 1;
         // 第一种：接收字符串时的处理
-        /*try{
-//        ByteBuf buf = ((ByteBuf) msg);  // TODO  当发送String 时，此处会转换异常，但官方文档示例如此，;sserver 和 sclient 的handler中都存在，避免他
-//        String rev = getMessage(((ByteBuf) msg));
-            System.out.println("服务器收到客户端数据:" + msg); // 输出控制台时，需要手动释放信息即finally中代码
+        try{
+            ByteBuf byteBuf = ((ByteBuf) msg);  // TODO  当发送String 时，此处会转换异常，但官方文档示例如此，;sserver 和 sclient 的handler中都存在，避免他
+            ByteBuf buf = byteBuf.readBytes(byteBuf.readableBytes());
+            System.out.println("服务器收到客户端数据" + channelId + "数据:" + buf.toString(Charset.forName("utf-8"))); // 输出控制台时，需要手动释放信息即finally中代码
         }finally {
             ReferenceCountUtil.release(msg);
-        }*/
-
+        }
         // 第一种：接收字符串时的处理,此时netty将自动释放信息
-        System.out.println("服务器收到客户端" + channelId + "数据:" + msg);
-        readerIdleTime = 1;
 //        ctx.write(msg);
 //        ctx.flush();  // 也可以直接使用writeAndFlush()方法
     }
@@ -75,7 +79,11 @@ public class SocketServerHandler extends SimpleChannelInboundHandler {
 //        ctx.writeAndFlush(Unpooled.EMPTY_BUFFER).addListener(ChannelFutureListener.CLOSE);  // 注释掉 ，写一个非空的buf
         // .addListener(ChannelFutureListener.CLOSE) 接收信息后是否关闭连接
 //        ctx.writeAndFlush(Unpooled.copiedBuffer("你好，客户端，已收到你发送的信息", CharsetUtil.UTF_8)).addListener(ChannelFutureListener.CLOSE);
-        ctx.writeAndFlush(Unpooled.copiedBuffer("你好" + channelId + "已收到你发送的信息", CharsetUtil.UTF_8));
+//        ctx.writeAndFlush(Unpooled.copiedBuffer("你好" + channelId + "已收到你发送的信息", CharsetUtil.UTF_8));
+        ctx.writeAndFlush(Unpooled.copiedBuffer(("你好" + channelId + "已收到你发送的信息").getBytes()));
+        // 重置心跳
+        writerIdleTime = 1;
+        allIdleTime = 1;
         // ctx.flush();
         // 第二种方法：在client端关闭channel连接，这样的话，会触发两次channelReadComplete方法。
         // ctx.flush().close().sync(); // 第三种：改成这种写法也可以，但是这中写法，没有第一种方法的好。

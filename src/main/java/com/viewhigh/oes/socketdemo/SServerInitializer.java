@@ -26,9 +26,9 @@ public class SServerInitializer extends ChannelInitializer<SocketChannel> {
                 1024,0,4,0,4,true));
         pipeline.addLast(new LengthFieldPrepender(4));
         //字符串解码
-        pipeline.addLast(new StringDecoder(CharsetUtil.UTF_8));
+//        pipeline.addLast(new StringDecoder(CharsetUtil.UTF_8));
         //字符串编码
-        pipeline.addLast(new StringEncoder(CharsetUtil.UTF_8));
+//        pipeline.addLast(new StringEncoder(CharsetUtil.UTF_8));
         //自己定义的处理器
         pipeline.addLast(new SocketServerHandler());
     }
