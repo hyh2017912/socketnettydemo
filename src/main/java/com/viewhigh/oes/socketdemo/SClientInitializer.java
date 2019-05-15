@@ -18,8 +18,8 @@ public class SClientInitializer extends ChannelInitializer<SocketChannel> {
         pipeline.addLast(new IdleStateHandler(0,0, InfoConfig.HEART_INTERVAL_TIME_CLIENT.getConfig()));
         pipeline.addLast(new LengthFieldBasedFrameDecoder(1024,0,4,0,4));
         pipeline.addLast(new LengthFieldPrepender(4));
-        pipeline.addLast(new StringEncoder(CharsetUtil.UTF_8));
-        pipeline.addLast(new StringDecoder(CharsetUtil.UTF_8));
+//        pipeline.addLast(new StringEncoder(CharsetUtil.UTF_8));
+//        pipeline.addLast(new StringDecoder(CharsetUtil.UTF_8));
         pipeline.addLast(new SocketClientHandler());
     }
 }

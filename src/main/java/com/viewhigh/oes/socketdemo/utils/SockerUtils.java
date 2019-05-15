@@ -19,14 +19,15 @@ public class SockerUtils {
             return;
         }*/
         try {
-            Thread.sleep(5000);
+            Thread.sleep(6000);
             System.out.println("开始休眠。。。");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         String sendInfo = "数据内容：" + s + ",时间：" + System.currentTimeMillis();
         System.out.println( s + "准备发送的数据包：" + sendInfo);
-        ctx.writeAndFlush(Unpooled.copiedBuffer(sendInfo, CharsetUtil.UTF_8)); // 必须有flush
+//        ctx.writeAndFlush(Unpooled.copiedBuffer(sendInfo, CharsetUtil.UTF_8)); // 必须有flush
+        ctx.writeAndFlush(Unpooled.copiedBuffer(sendInfo.getBytes())); // 必须有flush
     }
 
     public static void closed(ChannelHandlerContext ctx){
