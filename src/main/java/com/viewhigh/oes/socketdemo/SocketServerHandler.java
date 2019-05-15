@@ -72,7 +72,7 @@ public class SocketServerHandler extends SimpleChannelInboundHandler {
         System.out.println("服务端接收数据完毕..");
         try {
             Thread.sleep(0);
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         // 第一种方法：写一个空的buf，并刷新写出区域。完成后关闭sock channel连接。
