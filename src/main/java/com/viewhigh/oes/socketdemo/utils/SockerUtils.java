@@ -10,6 +10,7 @@ import java.util.Scanner;
  * 消息发送工具
  */
 public class SockerUtils {
+
     private static Scanner inputScanner = new Scanner(System.in);
     public static void sendMsg(ChannelHandlerContext ctx, String s){
 /*        System.out.println("请输入你要发送的信息，并按回车键确认发送");
